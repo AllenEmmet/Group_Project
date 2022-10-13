@@ -1,0 +1,26 @@
+{
+  "name": "group_project",
+  "version": "1.0.0",
+  "description": "Group Project by Eryckson de Guzman, John Carter Gonzales, William Turner, and Emmet Allen",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllenEmmet/Group_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AllenEmmet/Group_Project/issues"
+  },
+  "homepage": "https://github.com/AllenEmmet/Group_Project#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
+  }
+}
