@@ -5,11 +5,12 @@ const port = 8000
 
 require('./config/mongoose.config');
 
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
-app.use(cors({
-    origin: 'http://localhost:3000'
-}));
+
+require("./config/mongoose.config");
+require("./routes/activity.routes")(app);
 
 
 
