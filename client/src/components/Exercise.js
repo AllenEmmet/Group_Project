@@ -6,7 +6,7 @@ const Food = () => {
     <div>
         <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}}>
             <FormControl>
-                <InputLabel htmlFor='type'>Type:</InputLabel>
+                <InputLabel htmlFor='type'>Type of exercise:</InputLabel>
                 <Select>
                     <MenuItem>Running</MenuItem>
                     <MenuItem>Biking</MenuItem>
