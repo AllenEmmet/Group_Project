@@ -1,23 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import {BrowserRouter, Routes, Router, Route, Navigate} from 'react-router-dom'
+import { AppBar, Paper } from '@mui/material';
+import Main from './views/Main'
+import AddFood from './views/AddFood'
+import AddExcercise from './views/AddExercise'
 
 function App() {
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Main/>} path='/' default></Route>
+          <Route element={<AddFood/>} path='/food/add'></Route>
+          <Route element={<AddExcercise/>} path='/exercise/add'></Route> 
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
