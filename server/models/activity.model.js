@@ -15,7 +15,7 @@ const ActivitySchema = new mongoose.Schema({
                 'Bicep Curls',
             ],
             
-        required:[true,"A class is required"]
+        required:[true,"An Activity is required"]
     },
     duration: {
         type: String,
