@@ -10,7 +10,7 @@ const AddExcercise = () => {
   return (
     <div>
         <AppBar position='sticky'><Header2/></AppBar>
-        <Exercise></Exercise>
+        <Exercise method={'post'} url={'http://localhost:8000/api/activity'}></Exercise>
     </div>
   )
 }
