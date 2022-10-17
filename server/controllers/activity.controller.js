@@ -5,6 +5,7 @@ module.exports.createActivity = (req, res) => {
   Activity.create(req.body)
     .then((newActivity) => {
       res.json({ newActivity });
+      console.log(res.body);
     })
     .catch((err) => {
       res.status(400).json({ err });
