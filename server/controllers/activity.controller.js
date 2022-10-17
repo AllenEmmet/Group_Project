@@ -14,8 +14,8 @@ module.exports.createActivity = (req, res) => {
 //Getting all activities
 module.exports.getAllActivity = (req, res) => {
   Activity.find()
-    .then((allActivitys) => {
-      res.json(allActivitys);
+    .then((allActivity) => {
+      res.json(allActivity);
     })
     .catch((err) => {
       res.status(400).json({ err });
