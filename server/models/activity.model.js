@@ -20,7 +20,7 @@ const ActivitySchema = new mongoose.Schema({
         required: [false, "Activity Duration is required"],
         minLength: [2, "Activity's duration must have at least 3 characters"],
     },
-    totalcals: {
+    burnedcalories: {
         type: Number,
         required: [false, "Activity Duration is required"],
         minLength: [2, "Activity's duration must have at least 3 characters"],
@@ -38,3 +38,20 @@ const ActivitySchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model("Activity", ActivitySchema); 
+
+
+const FoodSchema = new mongoose.Schema({
+    food: {
+        type: String,
+        required: [true, "Food Name is required"],
+        minLength: [2, "Food Name must have at least 2 characters"],
+    },
+    calories: {
+        type: Number,
+        required: [true, "Activity Duration is required"],
+        minLength: [2, "Activity's duration must have at least 3 characters"],
+    },
+
+})
+
+module.exports = mongoose.model("Food", FoodSchema); 
