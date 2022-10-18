@@ -1,8 +1,10 @@
 import React from 'react'
 import { FormControl, Input, InputLabel, Button } from '@mui/material';
+import axios from 'axios'; 
+import { useParams } from 'react-router-dom';
 
 const Food = () => {
-
+  const {_id} = useParams();
   return (
     <div>
         <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}}>
