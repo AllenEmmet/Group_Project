@@ -48,8 +48,7 @@ const FoodSchema = new mongoose.Schema({
     },
     calories: {
         type: Number,
-        required: [true, "Activity Duration is required"],
-        minLength: [2, "Activity's duration must have at least 3 characters"],
+        required: [true, "Calories are required"],
     },
 
 })
