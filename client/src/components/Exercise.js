@@ -3,10 +3,11 @@ import { FormControl, Input, InputLabel, MenuItem, Select, Button } from '@mui/m
 import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom'
 
-const Food = (props) => {
-    const [exercise, setExercise] = useState(' ')
-    const [duration, setDuration] = useState(' ')
-    const [totalcals, setTotalcals] = useState(' ')
+const Exercise = (props) => {
+    const [exercise, setExercise] = useState('')
+    const [duration, setDuration] = useState(0)
+    const [burnedcalories, setBurnedcalories] = useState(0)
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate()
     const {method, url} = props
     const typeHandler = (e) =>{
@@ -16,21 +17,23 @@ const Food = (props) => {
     const submitHandler = (e) =>{
         e.preventDefault()
         console.log(exercise)
-        axios({method, url, data: {exercise, duration, totalcals}})
+        console.log(duration)
+        console.log(burnedcalories)
+        axios({method, url, data: {exercise, duration, burnedcalories}})
         .then((res)=>{
             console.log(res);
             navigate('/')})
         .catch(err=>{
             console.log(err)
-            // const errorResponse = err.response.data.err.errors;
+            const errorResponse = err.response.data.err.errors;
             
-            // const errorArray = [];
-            // for (const key of Object.keys(errorResponse)) {
-            //     errorArray.push(errorResponse[key].message)
-            // }
-            // // console.log(errorResponse);
-            // setErrors(errorArray)
-            // console.log(errors)
+            const errorArray = [];
+            for (const key of Object.keys(errorResponse)) {
+                errorArray.push(errorResponse[key].message)
+            }
+            // console.log(errorResponse);
+            setErrors(errorArray)
+            console.log(errors)
     })
     }
   return (
@@ -47,12 +50,12 @@ const Food = (props) => {
                 </Select>
             </FormControl>
             <FormControl>
-                <InputLabel htmlFor='duration' onChange={(e)=>setDuration(e.target.value)}>Duration (minutes):</InputLabel>
-                <Input type='number' name='duration'></Input>
+                <InputLabel htmlFor='duration' >Duration (minutes):</InputLabel>
+                <Input type='number' name='duration' onChange={(e)=>setDuration(e.target.value)}></Input>
             </FormControl>
             <FormControl>
-                <InputLabel htmlFor='totalcals' onChange={(e)=>setTotalcals(e.target.value)}>Calories</InputLabel>
-                <Input type='number' name='totalcals'></Input>
+                <InputLabel htmlFor='burnedcalories' >Calories</InputLabel>
+                <Input type='number' name='burnedcalories' onChange={(e)=>setBurnedcalories(e.target.value)}></Input>
             </FormControl>
             <FormControl>
                     <Button type='submit'>Save Changes</Button>
@@ -62,4 +65,4 @@ const Food = (props) => {
   )
 }
 
-export default Food
+export default Exercise

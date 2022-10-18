@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ActivitySchema = new mongoose.Schema({
     exercise:{
         type:String,
-        required:[false,"An Exercise is required"],
+        required:[true,"An Exercise is required"],
         enum:{
             values:[
                 'Lunges',
@@ -17,7 +17,7 @@ const ActivitySchema = new mongoose.Schema({
     },
     duration: {
         type: Number,
-        required: [false, "Activity Duration is required"],
+        required: [true, "Activity Duration is required"],
         minLength: [2, "Activity's duration must have at least 2 characters"],
     },
     burnedcalories: {
