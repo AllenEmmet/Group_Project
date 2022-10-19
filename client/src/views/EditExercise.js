@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Header2 from '../components/Header2'
 import { AppBar } from '@mui/material'
-import Exercise from '../components/Exercise'
+import UpdateExercise from '../components/UpdateExercise'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const EditExercise = () => {
+const EditExercise = (props) => {
     const {id} = useParams()
     const [exercise, setExercise] = useState('')
     const [duration, setDuration] = useState(0)
@@ -16,14 +16,15 @@ const EditExercise = () => {
             .then(res=>{
                 
                 setExercise(res.data.exercise)
-                
+                setDuration(res.data.duration)
+                setBurnedcalories(res.data.burnedcalories)
             })
             .catch(err=> console.log(err))
         },[])
   return (
     <div>
         <AppBar position='sticky'><Header2/></AppBar>
-        <Exercise exercise={exercise} method={'put'} url={`http://localhost:8000/api/activity/edit/${id}`}></Exercise>
+        <UpdateExercise exercise={exercise} setExercise={setExercise} duration={duration} setDuration={setDuration} burnedcalories={burnedcalories} setBurnedcalories={setBurnedcalories} method={'put'} url={`http://localhost:8000/api/activity/edit/${id}`}></UpdateExercise>
     </div>
   )
 }

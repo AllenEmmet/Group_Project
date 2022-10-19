@@ -13,18 +13,53 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const [workouts, setWorkouts] = useState([])
   const [food, setFood] = useState([])
+  const [btotal, setBtotal] = useState(0)
+  const [ctotal, setCtotal] = useState(0)
+
+  
+    
+  // }
   useEffect(()=>{
+    
     axios.get('http://localhost:8000/api/activity')
         .then((res)=> {setWorkouts(res.data)})
         .catch((err)=>{console.log(err)})
-}
+
+}, []
 )
+useEffect(()=>{
+  const getWtotal = () =>{
+    workouts.map((workout) =>{
+      setBtotal(b => b + workout.burnedcalories)
+  
+    })
+  return btotal
+  }
+  getWtotal()
+},[workouts])
+
+useEffect(()=>{
+  const getFtotal = () =>{
+    food.map((meal) =>{
+      setCtotal(c => c + meal.calories)
+  
+    })
+  return ctotal
+  }
+  getFtotal()
+},[food])
 
 useEffect(()=>{
   axios.get('http://localhost:8000/api/food')
-      .then((res)=> {setFood(res.data)})
+      .then((res)=> {
+        setFood(res.data)
+        food.map((meal)=>(
+          setCtotal(ctotal + meal.calories)
+        ))
+        // console.log(ctotal)
+      })
       .catch((err)=>{console.log(err)})
-}
+}, []
 )
 
   const deleteWorkout = (id) =>{
@@ -44,7 +79,9 @@ const deleteFood = (id) =>{
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{margin: '20px'}}>
         <h2>Today's total:</h2>
-        <p>(Display  either positive or negative calorie value depending on which below is higher</p>
+        <p>
+          {ctotal} eaten - {btotal} burned = {ctotal - btotal}
+        </p>
       </div>
       <div style={{display: 'flex'}}>
         <div style={{margin: '20px'}}>
