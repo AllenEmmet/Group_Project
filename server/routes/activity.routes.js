@@ -7,7 +7,7 @@ module.exports = (app) => {
   app.get("/api/activity", ActivityController.getAllActivity);
   app.get("/api/activity/:id", ActivityController.getOneActivity);
     //update
-  app.put("/api/activity/:id", ActivityController.updateActivity);
+  app.put("/api/activity/edit/:id", ActivityController.updateActivity);
     //delete
   app.delete("/api/activity/:id", ActivityController.deleteActivity);
 };

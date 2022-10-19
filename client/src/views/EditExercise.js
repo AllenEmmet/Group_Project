@@ -23,7 +23,7 @@ const EditExercise = () => {
   return (
     <div>
         <AppBar position='sticky'><Header2/></AppBar>
-        <Exercise exercise={exercise} method={'put'} url={`http://localhost:8000/api/activity/${id}`}></Exercise>
+        <Exercise exercise={exercise} method={'put'} url={`http://localhost:8000/api/activity/edit/${id}`}></Exercise>
     </div>
   )
 }
