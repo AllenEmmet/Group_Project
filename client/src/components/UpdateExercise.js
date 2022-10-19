@@ -28,12 +28,8 @@ const UpdateExercise = (props) => {
             console.log(err)
             const errorResponse = err.response.data.err.errors;
             
-            const errorArray = [];
-            for (const key of Object.keys(errorResponse)) {
-                errorArray.push(errorResponse[key].message)
-            }
-            // console.log(errorResponse);
-            setErrors(errorArray)
+           
+            setErrors(errorResponse)
             console.log(errors)
     })
     }
@@ -49,14 +45,17 @@ const UpdateExercise = (props) => {
                     <MenuItem name='type' value='Pullups'>Pullups</MenuItem>
                     <MenuItem name='type' value='Burpees'>Burpees</MenuItem>
                 </Select>
+                {errors.exercise ? <p>{errors.exercise.message}</p> : null}
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor='duration' >Duration (minutes):</InputLabel>
                 <Input type='number' name='duration' value={duration} onChange={(e)=>setDuration(e.target.value)}></Input>
+                {errors.duration ? <p>{errors.duration.message}</p> : null}
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor='burnedcalories' >Calories</InputLabel>
                 <Input type='number' name='burnedcalories' value={burnedcalories} onChange={(e)=>setBurnedcalories(e.target.value)}></Input>
+                {errors.burnedcalories ? <p>{errors.burnedcalories.message}</p> : null}
             </FormControl>
             <FormControl>
                     <Button type='submit'>Save Changes</Button>

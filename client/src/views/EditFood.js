@@ -27,7 +27,7 @@ const AddFood = () => {
   return (
     <div>
         <AppBar position='sticky'><Header2/></AppBar>
-        <EditFood food={food} setFood={setFood} calories={calories} setCalories={setCalories}></EditFood>
+        <EditFood food={food} setFood={setFood} calories={calories} setCalories={setCalories} method={'put'} url={`http://localhost:8000/api/food/edit/${id}`}></EditFood>
     </div>
   )
 }

@@ -22,7 +22,7 @@ const Dashboard = () => {
   useEffect(()=>{
     
     axios.get('http://localhost:8000/api/activity')
-        .then((res)=> {setWorkouts(res.data)})
+        .then((res)=> {setWorkouts(res.data); console.log(res.data)})
         .catch((err)=>{console.log(err)})
 
 }, []
@@ -62,16 +62,30 @@ useEffect(()=>{
 }, []
 )
 
-  const deleteWorkout = (id) =>{
+const removeWFromDom = (id) =>{
+  setWorkouts(workouts.filter(workout => workout._id != id))
+}
+const removeFFromDom = (id) =>{
+  setFood(food.filter(food => food._id != id))
+}
+const deleteWorkout = id =>{
     axios.delete(`http://localhost:8000/api/activity/${id}`)
-    .then(res=>console.log(res.data))
+    .then(
+      (res)=>{
+      console.log(res.data)
+      removeWFromDom(id)
+    })
     .catch(err=>console.log(err))
     navigate('/')
 }
 
 const deleteFood = (id) =>{
   axios.delete(`http://localhost:8000/api/food/${id}`)
-  .then(res=>console.log(res.data))
+  .then(
+    (res)=>{
+      console.log(res.data)
+      removeFFromDom(id)
+    })
   .catch(err=>console.log(err))
   navigate('/')
 }
