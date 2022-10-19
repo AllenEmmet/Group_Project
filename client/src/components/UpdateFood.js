@@ -8,6 +8,7 @@ const UpdateFood = (props) => {
   const {id} = useParams();
   const {food, setFood} = props
   const {calories, setCalories} = props
+  const {method, url} = props
   const nav = useNavigate();
   const [errors, setErrors] = useState({});
 
@@ -28,19 +29,17 @@ const UpdateFood = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios
-      .put(`http://localhost:8000/api/food/${id}`, {
-        food,
-        calories
-      })
+    axios({method, url, data: {food, calories}})
       .then((response) => {
         console.log(response);
         nav("/");
       })
       .catch((err) => {
-        console.log(err)
-        // console.log(err.response.data.err.errors);
-        setErrors(err.response.data.err.errors);
+        // console.log(err)
+        const errorResponse = err.response.data.err.errors;
+        console.log(errorResponse)
+        setErrors(errorResponse)
+        // console.log(errors)
         
       });
   };
