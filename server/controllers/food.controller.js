@@ -1,4 +1,4 @@
-const Food = require("../models/activity.model");
+const Food = require("../models/food.model");
 
 //Creating a new food
 module.exports.createFood = (req, res) => {
