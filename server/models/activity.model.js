@@ -16,18 +16,18 @@ const ActivitySchema = new mongoose.Schema({
         }
     },
     duration: {
-        type: Number,
+        type: String,
         required: [true, "Activity Duration is required"],
         minLength: [2, "Activity's duration must have at least 2 characters"],
     },
     burnedcalories: {
-        type: Number,
-        required: [false, "Activity Duration is required"],
-        minLength: [2, "Activity's duration must have at least 2 characters"],
+        type: String,
+        required: [true, "Expected calories burned is required"],
+        minLength: [2, "Expected calories burned must have at least 2 characters"],
     },
     status: {
         type: Boolean,
-        required: [false, "Status is required"],
+        required: [true, "Status is required"],
         default: false,
     },
     desc: {

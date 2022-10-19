@@ -7,6 +7,7 @@ import Main from './views/Main'
 import AddFood from './views/AddFood'
 import AddExercise from './views/AddExercise'
 import EditExercise from './views/EditExercise';
+import EditFood from './views/EditFood';
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
           <Route element={<AddFood/>} path='/food/add'></Route>
           <Route element={<AddExercise/>} path='/exercise/add'></Route> 
           <Route element={<EditExercise></EditExercise>} path='exercise/edit/:id'></Route>
+          <Route element={<EditFood></EditFood>} path='food/edit/:id'></Route>
         </Routes>
       </BrowserRouter>
     </div>

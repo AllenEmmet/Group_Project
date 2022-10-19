@@ -15,31 +15,28 @@ const Exercise = (props) => {
         setExercise(e.target.value)
     }
 
-    const submitHandler = (e) =>{
-        e.preventDefault()
-        console.log(exercise)
-        console.log(duration)
-        console.log(burnedcalories)
-        axios({method, url, data: {exercise, duration, burnedcalories}})
-        .then((res)=>{
-            console.log(res);
-            navigate('/')})
-        .catch(err=>{
-            console.log(err)
-            const errorResponse = err.response.data.err.errors;
-            
-            const errorArray = [];
-            for (const key of Object.keys(errorResponse)) {
-                errorArray.push(errorResponse[key].message)
-            }
-            // console.log(errorResponse);
-            setErrors(errorArray)
-            console.log(errors)
-    })
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios
+          .post("http://localhost:8000/api/activity", {
+            exercise,
+            duration,
+            burnedcalories,
+          })
+          .then((response) => {
+            console.log(response);
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err.response.data.err.errors);
+            setErrors(err.response.data.err.errors);
+          });
+      };
+
+
   return (
     <div>
-        <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}} onSubmit={submitHandler}>
+        <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}} onSubmit={handleSubmit}>
             <FormControl>
                 <InputLabel htmlFor='type'>Type of exercise:</InputLabel>
                 <Select onChange={typeHandler}>
@@ -49,14 +46,17 @@ const Exercise = (props) => {
                     <MenuItem name='type' value='Pullups'>Pullups</MenuItem>
                     <MenuItem name='type' value='Burpees'>Burpees</MenuItem>
                 </Select>
+                {errors.exercise ? <p>{errors.exercise.message}</p> : null}
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor='duration' >Duration (minutes):</InputLabel>
                 <Input type='number' name='duration' onChange={(e)=>setDuration(e.target.value)}></Input>
+                {errors.duration ? <p>{errors.duration.message}</p> : null}
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor='burnedcalories' >Calories</InputLabel>
                 <Input type='number' name='burnedcalories' onChange={(e)=>setBurnedcalories(e.target.value)}></Input>
+                {errors.burnedcalories ? <p>{errors.burnedcalories.message}</p> : null}
             </FormControl>
             <FormControl>
                     <Button type='submit'>Save Changes</Button>

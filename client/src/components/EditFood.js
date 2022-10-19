@@ -2,7 +2,7 @@ import React from 'react'
 import { FormControl, Input, InputLabel, Button } from '@mui/material';
 import axios from 'axios'; 
 import { useParams, useNavigate } from 'react-router-dom';
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 const Food = () => {
   const {id} = useParams();
