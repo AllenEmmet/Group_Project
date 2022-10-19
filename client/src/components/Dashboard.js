@@ -13,8 +13,8 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const [workouts, setWorkouts] = useState([])
   const [food, setFood] = useState([])
-  const [btotal, setBtotal] = useState('')
-  const [ctotal, setCtotal] = useState('')
+  const [btotal, setBtotal] = useState(0)
+  const [ctotal, setCtotal] = useState(0)
 
   
     

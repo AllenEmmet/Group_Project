@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom'
 const Exercise = (props) => {
     const [exercise, setExercise] = useState('')
     const [duration, setDuration] = useState(0)
-    const [burnedcalories, setBurnedcalories] = useState(0)
+    const [burnedcalories, setBurnedcalories] = useState()
     const [errors, setErrors] = useState({});
     const navigate = useNavigate()
     const {method, url} = props
