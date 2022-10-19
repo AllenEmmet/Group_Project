@@ -6,16 +6,24 @@
   */
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'; 
-import {Table, TableContainer, TableBody, TableHead, TableCell, TableRow} from '@mui/material'
+import {Table, TableContainer, TableBody, TableHead, TableCell, TableRow, Button} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const navigate = useNavigate()
   const [workouts, setWorkouts] = useState([])
+  const [food, setFood] = useState([])
   useEffect(()=>{
     axios.get('http://localhost:8000/api/activity')
         .then((res)=> {setWorkouts(res.data)})
         .catch((err)=>{console.log(err)})
+}
+)
+
+useEffect(()=>{
+  axios.get('http://localhost:8000/api/food')
+      .then((res)=> {setFood(res.data)})
+      .catch((err)=>{console.log(err)})
 }
 )
 
@@ -24,6 +32,13 @@ const Dashboard = () => {
     .then(res=>console.log(res.data))
     .catch(err=>console.log(err))
     navigate('/')
+}
+
+const deleteFood = (id) =>{
+  axios.delete(`http://localhost:8000/api/food/${id}`)
+  .then(res=>console.log(res.data))
+  .catch(err=>console.log(err))
+  navigate('/')
 }
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -35,12 +50,13 @@ const Dashboard = () => {
         <div style={{margin: '20px'}}>
           <h3>Calories burned today:</h3>
           <div>
-        <h2>Today's workouts</h2>
         <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Details</TableCell>
+                        <TableCell>Exercise</TableCell>
+                        <TableCell>Duration</TableCell>
+                        <TableCell>Calories Burned</TableCell>
                         <TableCell>Actions Available</TableCell>
                     </TableRow>
                 </TableHead>
@@ -48,10 +64,12 @@ const Dashboard = () => {
                 {
                     workouts.map((workout, index)=>(
                         <TableRow key={index}>
-                            <TableCell>{workout.exercise} for {workout.duration} minutes and {workout.burnedcalories} calories</TableCell>
+                            <TableCell>{workout.exercise}</TableCell>
+                            <TableCell>{workout.duration} mins</TableCell>
+                            <TableCell>{workout.burnedcalories} calories burned</TableCell>
                             <TableCell>
-                                <button onClick={()=>navigate(`exercise/edit/${workout._id}`)}>Edit</button> 
-                                <button onClick={()=>deleteWorkout(workout._id)}>Delete</button> 
+                                <Button onClick={()=>navigate(`exercise/edit/${workout._id}`)}>Edit</Button> 
+                                <Button onClick={()=>deleteWorkout(workout._id)}>Delete</Button> 
                             </TableCell>
                         </TableRow>
                     ))
@@ -63,7 +81,31 @@ const Dashboard = () => {
         </div>
         <div style={{margin: '20px'}}>
           <h3>Calories eaten today:</h3>
-          <p>Display calorie total from today's inputs</p>
+          <TableContainer>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Food Item</TableCell>
+                        <TableCell>Calories Consumed</TableCell>
+                        <TableCell>Actions Available</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                {
+                    food.map((food, index)=>(
+                        <TableRow key={index}>
+                            <TableCell>{food.food}</TableCell>
+                            <TableCell>{food.calories} calories consumed</TableCell>
+                            <TableCell>
+                                <Button onClick={()=>navigate(`food/edit/${food._id}`)}>Edit</Button> 
+                                <Button onClick={()=>deleteFood(food._id)}>Delete</Button> 
+                            </TableCell>
+                        </TableRow>
+                    ))
+                }
+                </TableBody>
+            </Table>
+        </TableContainer>
         </div>
       </div>
     </div>
