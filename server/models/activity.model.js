@@ -21,7 +21,7 @@ const ActivitySchema = new mongoose.Schema({
         minLength: [2, "Activity's duration must have at least 2 characters"],
     },
     burnedcalories: {
-        type: String,
+        type: Number,
         required: [true, "Expected calories burned is required"],
         minLength: [2, "Expected calories burned must have at least 2 characters"],
     },
