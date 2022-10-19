@@ -3,10 +3,10 @@ import { FormControl, Input, InputLabel, MenuItem, Select, Button } from '@mui/m
 import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom'
 
-const Exercise = (props) => {
-    const [exercise, setExercise] = useState('')
-    const [duration, setDuration] = useState(0)
-    const [burnedcalories, setBurnedcalories] = useState(0)
+const UpdateExercise = (props) => {
+    const {exercise, setExercise} = props
+    const {duration, setDuration} = props
+    const {burnedcalories, setBurnedcalories} = props
     const [errors, setErrors] = useState({});
     const navigate = useNavigate()
     const {method, url} = props
@@ -42,7 +42,7 @@ const Exercise = (props) => {
         <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}} onSubmit={submitHandler}>
             <FormControl>
                 <InputLabel htmlFor='type'>Type of exercise:</InputLabel>
-                <Select onChange={typeHandler}>
+                <Select value={exercise} onChange={typeHandler}>
                     <MenuItem name='type' value='Lunges'>Lunges</MenuItem>
                     <MenuItem name='type' value='Pushups'>Pushups</MenuItem>
                     <MenuItem name='type' value='Squats'>Squats</MenuItem>
@@ -52,11 +52,11 @@ const Exercise = (props) => {
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor='duration' >Duration (minutes):</InputLabel>
-                <Input type='number' name='duration' onChange={(e)=>setDuration(e.target.value)}></Input>
+                <Input type='number' name='duration' value={duration} onChange={(e)=>setDuration(e.target.value)}></Input>
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor='burnedcalories' >Calories</InputLabel>
-                <Input type='number' name='burnedcalories' onChange={(e)=>setBurnedcalories(e.target.value)}></Input>
+                <Input type='number' name='burnedcalories' value={burnedcalories} onChange={(e)=>setBurnedcalories(e.target.value)}></Input>
             </FormControl>
             <FormControl>
                     <Button type='submit'>Save Changes</Button>
@@ -66,4 +66,4 @@ const Exercise = (props) => {
   )
 }
 
-export default Exercise
+export default UpdateExercise
