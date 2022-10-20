@@ -191,7 +191,11 @@ const Dashboard = () => {
                   return (
                     <Link to={"/"}>
                       <Typography variant="h5" component="div" key={index}>
-                        {food.food}<Button onClick={()=>deleteFood(food._id)}>Remove</Button> 
+                      {food.food}
+                      <Link to={`food/edit/${food._id}`}>
+                        <Button>Edit</Button>
+                        </Link>
+                        <Button onClick={()=>deleteFood(food._id)}>Remove</Button> 
                       </Typography>
                     </Link>
                   );
@@ -228,7 +232,11 @@ const Dashboard = () => {
                   return (
                     <Link to={"/"}>
                       <Typography variant="h5" component="div" key={index}>
-                        {exercises.exercise}<Button onClick={()=>deleteWorkout(exercises._id)}>Remove</Button> 
+                        {exercises.exercise}
+                        <Link to={`exercise/edit/${exercises._id}`}>
+                        <Button>Edit</Button>
+                        </Link>
+                        <Button onClick={()=>deleteWorkout(exercises._id)}>Remove</Button>
                       </Typography>
                     </Link>
                   );

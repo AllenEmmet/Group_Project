@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormControl, Input, InputLabel, Button } from '@mui/material';
+import { FormControl, Input, InputLabel, Button, Paper, Box} from '@mui/material';
 import axios from 'axios'; 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react'
@@ -47,6 +47,22 @@ const UpdateFood = (props) => {
 
   return (
     <div>
+               <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: '50px',
+        flexWrap: 'wrap',
+        '& > :not(style)': {
+          m: 1,
+          width: 800,
+          height: 200,
+        },
+      }}
+      
+    >
+      <Paper elevation={5}>
         <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}} onSubmit={handleSubmit}>
             <FormControl>
                 <InputLabel htmlFor='name'>Name:</InputLabel>
@@ -59,9 +75,11 @@ const UpdateFood = (props) => {
             </FormControl>
             {errors.calories ? <p>{errors.calories.message}</p> :null}
             <FormControl>
-                    <Input type='submit'></Input>
+                    <Button type='submit' variant="contained" style={{marginTop:"20px"}}>Save Changes</Button>
             </FormControl>
         </form>
+        </Paper>
+        </Box>
     </div>
   )
 }
