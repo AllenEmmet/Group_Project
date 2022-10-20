@@ -10,7 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-import StarIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 //import Link from '@mui/material/Link';
@@ -37,33 +37,39 @@ const Dashboard = () => {
         console.log(err);
       });
   }, []);
+  const getWtotal = () => {
+    let burnedcalories = 0
+    workouts.map((workout) => {
+      burnedcalories += workout.burnedcalories;
+    });
+    setBtotal(burnedcalories)
+  };
+
+  const getWDtotal = () => {
+    let duration = 0
+    workouts.map((workout) => {
+      duration += workout.duration;
+    });
+    setDtotal(duration)
+  };
   useEffect(() => {
-    const getWtotal = () => {
-      workouts.map((workout) => {
-        setBtotal((b) => b + workout.burnedcalories);
-      });
-      return btotal;
-    };
+    
     getWtotal();
+    
+    getWDtotal();
   }, [workouts]);
 
-  useEffect(() => {
-    const getWtotal = () => {
-      workouts.map((workout) => {
-        setDtotal((b) => b + workout.duration);
-      });
-      return dtotal;
-    };
-    getWtotal();
-  }, [workouts]);
+ 
+  const getFtotal = () => {
+    let foodcal = 0
+    food.map((meal) => {
+      foodcal += meal.calories;
+    });
+    setCtotal(foodcal)
+  };
 
   useEffect(() => {
-    const getFtotal = () => {
-      food.map((meal) => {
-        setCtotal((c) => c + meal.calories);
-      });
-      return ctotal;
-    };
+    
     getFtotal();
   }, [food]);
 
@@ -138,7 +144,7 @@ const Dashboard = () => {
           <Card sx={{ minWidth: 275 }}>
             <CardHeader
               title={"Total Calories"}
-              titleTypography={{ align: "center" }}
+              titletypography={{ align: "center" }}
               subheaderTypographyProps={{
                 align: "center",
               }}
@@ -174,7 +180,7 @@ const Dashboard = () => {
               <CardHeader
                 title={"Calories Consumed"}
                 subheader={"Here is a list of your Foods!"}
-                titleTypography={{ align: "center" }}
+                titletypography={{ align: "center" }}
                 subheaderTypographyProps={{
                   align: "center",
                 }}
@@ -189,7 +195,7 @@ const Dashboard = () => {
                 {/*Map the Foods onto the card*/}
                 {food.map((food, index) => {
                   return (
-                    <Link to={"/"}>
+                    
                       <Typography variant="h5" component="div" key={index}>
                       {food.food}
                       <Link to={`food/edit/${food._id}`}>
@@ -197,7 +203,7 @@ const Dashboard = () => {
                         </Link>
                         <Button onClick={()=>deleteFood(food._id)}>Remove</Button> 
                       </Typography>
-                    </Link>
+                    
                   );
                 })}
               </CardContent>
@@ -216,7 +222,7 @@ const Dashboard = () => {
               <CardHeader
                 title={"Calories Burned"}
                 subheader={"Here is a list of your activities!"}
-                titleTypography={{ align: "center" }}
+                titletypography={{ align: "center" }}
                 subheaderTypographyProps={{
                   align: "center",
                 }}
