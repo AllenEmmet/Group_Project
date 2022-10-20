@@ -16,7 +16,7 @@ const ActivitySchema = new mongoose.Schema({
         }
     },
     duration: {
-        type: String,
+        type: Number,
         required: [true, "Activity Duration is required"],
         minLength: [2, "Activity's duration must have at least 2 characters"],
     },
