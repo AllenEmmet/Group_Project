@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { Link} from 'react-router-dom'
+import Doj from './assets/Doj.png'
 
 const Header = () => {
   
   return (
-    <div style={{display: 'flex', justifyContent: 'space-between', paddingLeft: '20px', paddingRight: '20px'}}>
-        <h1>Welcome to Fitness Tracker!</h1>
-        <Link to={'/food/add'} style={{color: 'white'}}>Add Food</Link>
-        <Link to={'/exercise/add'} style={{color: 'white'}}>Add Exercise</Link>
+    <div style={{display: 'flex', justifyContent: 'center', paddingLeft: '20px', paddingRight: '20px', height:'75px', alignItems:'center'}}>
+        <img src={Doj}/>
     </div>
   )
 }
