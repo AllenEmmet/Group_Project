@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormControl, Input, InputLabel, MenuItem, Select, Button } from '@mui/material';
+import { FormControl, Input, InputLabel, MenuItem, Select, Button, Paper, Box } from '@mui/material';
 import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom'
 
@@ -36,6 +36,22 @@ const Exercise = (props) => {
 
   return (
     <div>
+              <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: '50px',
+        flexWrap: 'wrap',
+        '& > :not(style)': {
+          m: 1,
+          width: 800,
+          height: 250,
+        },
+      }}
+      
+    >
+      <Paper elevation={5}>
         <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}} onSubmit={handleSubmit}>
             <FormControl>
                 <InputLabel htmlFor='type'>Type of exercise:</InputLabel>
@@ -59,9 +75,11 @@ const Exercise = (props) => {
                 {errors.burnedcalories ? <p>{errors.burnedcalories.message}</p> : null}
             </FormControl>
             <FormControl>
-                    <Button type='submit'>Save Changes</Button>
+                    <Button type='submit' variant="contained" style={{marginTop:"20px"}}>Save Changes</Button>
             </FormControl>
         </form>
+        </Paper>
+        </Box>
     </div>
   )
 }

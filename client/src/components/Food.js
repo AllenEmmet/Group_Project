@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FormControl, Input, InputLabel, Button } from "@mui/material";
+import { FormControl, Input, InputLabel, Button, Paper, Box } from "@mui/material";
 
 const Food = () => {
   const [food, setFood] = useState("");
@@ -28,6 +28,23 @@ const Food = () => {
   };
 
   return (
+    <>
+        <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: '50px',
+        flexWrap: 'wrap',
+        '& > :not(style)': {
+          m: 1,
+          width: 800,
+          height: 200,
+        },
+      }}
+      
+    >
+      <Paper elevation={5}>
     <div>
       <form
         onSubmit={handleSubmit}
@@ -52,10 +69,13 @@ const Food = () => {
           {errors.calories ? <p>{errors.calories.message}</p> : null}
         </FormControl>
         <FormControl>
-          <Button type="submit">Save Changes</Button>
+        <Button type='submit' variant="contained" style={{marginTop:"20px"}}>Add Food</Button>
         </FormControl>
       </form>
     </div>
+    </Paper>
+    </Box>
+    </>
   );
 };
 
