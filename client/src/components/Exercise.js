@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormControl, Input, InputLabel, MenuItem, Select, Button } from '@mui/material';
+import { FormControl, Input, InputLabel, MenuItem, Select, Button, Card, CardContent, Box, Container, Paper } from '@mui/material';
 import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom'
 
@@ -9,7 +9,6 @@ const Exercise = (props) => {
     const [burnedcalories, setBurnedcalories] = useState()
     const [errors, setErrors] = useState({});
     const navigate = useNavigate()
-    const {method, url} = props
 
     const typeHandler = (e) =>{
         setExercise(e.target.value)
@@ -36,6 +35,10 @@ const Exercise = (props) => {
 
   return (
     <div>
+    <Container fixed sx={{ mt:3 }}>
+    <Paper elevation={3}>
+      <Card>
+      <CardContent>
         <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}} onSubmit={handleSubmit}>
             <FormControl>
                 <InputLabel htmlFor='type'>Type of exercise:</InputLabel>
@@ -62,6 +65,10 @@ const Exercise = (props) => {
                     <Button type='submit'>Save Changes</Button>
             </FormControl>
         </form>
+    </CardContent>
+    </Card>
+    </Paper>
+    </Container>
     </div>
   )
 }
