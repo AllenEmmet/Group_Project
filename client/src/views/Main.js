@@ -5,18 +5,15 @@
   */
 
 import React from 'react'
-import { useState } from 'react'
 import Header from '../components/Header'
-
-import { AppBar } from '@mui/material'
 import Dashboard from '../components/Dashboard'
 
 const Main = () => {
     
   return (
     <div>
-        <AppBar position='sticky'><Header/></AppBar>
-        <Dashboard></Dashboard>
+    <Header/>        
+    <Dashboard/>    
     </div>
   )
 }
