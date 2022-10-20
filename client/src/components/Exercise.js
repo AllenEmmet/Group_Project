@@ -55,7 +55,7 @@ const Exercise = (props) => {
         <form style={{display: 'flex', flexDirection: 'column', margin: '20px'}} onSubmit={handleSubmit}>
             <FormControl>
                 <InputLabel htmlFor='type'>Type of exercise:</InputLabel>
-                <Select onChange={typeHandler}>
+                <Select value='' onChange={typeHandler}>
                     <MenuItem name='type' value='Lunges'>Lunges</MenuItem>
                     <MenuItem name='type' value='Pushups'>Pushups</MenuItem>
                     <MenuItem name='type' value='Squats'>Squats</MenuItem>
