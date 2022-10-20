@@ -5,7 +5,9 @@ import {BrowserRouter, Routes, Router, Route, Navigate} from 'react-router-dom'
 import { AppBar, Paper } from '@mui/material';
 import Main from './views/Main'
 import AddFood from './views/AddFood'
-import AddExcercise from './views/AddExercise'
+import AddExercise from './views/AddExercise'
+import EditExercise from './views/EditExercise';
+import EditFood from './views/EditFood';
 
 function App() {
   
@@ -15,7 +17,9 @@ function App() {
         <Routes>
           <Route element={<Main/>} path='/' default></Route>
           <Route element={<AddFood/>} path='/food/add'></Route>
-          <Route element={<AddExcercise/>} path='/exercise/add'></Route> 
+          <Route element={<AddExercise/>} path='/exercise/add'></Route> 
+          <Route element={<EditExercise></EditExercise>} path='exercise/edit/:id'></Route>
+          <Route element={<EditFood></EditFood>} path='food/edit/:id'></Route>
         </Routes>
       </BrowserRouter>
     </div>

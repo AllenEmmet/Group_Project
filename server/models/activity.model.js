@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ActivitySchema = new mongoose.Schema({
     exercise:{
         type:String,
-        required:[false,"An Exercise is required"],
+        required:[true,"An Exercise is required"],
         enum:{
             values:[
                 'Lunges',
@@ -16,18 +16,18 @@ const ActivitySchema = new mongoose.Schema({
         }
     },
     duration: {
-        type: Number,
-        required: [false, "Activity Duration is required"],
-        minLength: [2, "Activity's duration must have at least 3 characters"],
+        type: String,
+        required: [true, "Activity Duration is required"],
+        minLength: [2, "Activity's duration must have at least 2 characters"],
     },
     burnedcalories: {
         type: Number,
-        required: [false, "Activity Duration is required"],
-        minLength: [2, "Activity's duration must have at least 3 characters"],
+        required: [true, "Expected calories burned is required"],
+        minLength: [2, "Expected calories burned must have at least 2 characters"],
     },
     status: {
         type: Boolean,
-        required: [false, "Status is required"],
+        required: [true, "Status is required"],
         default: false,
     },
     desc: {
@@ -37,6 +37,7 @@ const ActivitySchema = new mongoose.Schema({
 
 })
 
+<<<<<<< HEAD
 module.exports = mongoose.model("Activity", ActivitySchema); 
 
 
@@ -55,3 +56,6 @@ const FoodSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model("Food", FoodSchema); 
+=======
+module.exports = mongoose.model("Activity", ActivitySchema); 
+>>>>>>> a4db0de643adf7b12f1daf1d78e067e343e5a981

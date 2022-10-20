@@ -4,23 +4,159 @@
   * User info, goals, calories, exercises
   * These then can be broken down into their seperate componenets
   */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'; 
+import {Table, TableContainer, TableBody, TableHead, TableCell, TableRow, Button} from '@mui/material'
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+  const [workouts, setWorkouts] = useState([])
+  const [food, setFood] = useState([])
+  const [btotal, setBtotal] = useState(0)
+  const [ctotal, setCtotal] = useState(0)
+
+  
+    
+  // }
+  useEffect(()=>{
+    
+    axios.get('http://localhost:8000/api/activity')
+        .then((res)=> {setWorkouts(res.data); console.log(res.data)})
+        .catch((err)=>{console.log(err)})
+
+}, []
+)
+useEffect(()=>{
+  const getWtotal = () =>{
+    workouts.map((workout) =>{
+      setBtotal(b => b + workout.burnedcalories)
+  
+    })
+  return btotal
+  }
+  getWtotal()
+},[workouts])
+
+useEffect(()=>{
+  const getFtotal = () =>{
+    food.map((meal) =>{
+      setCtotal(c => c + meal.calories)
+  
+    })
+  return ctotal
+  }
+  getFtotal()
+},[food])
+
+useEffect(()=>{
+  axios.get('http://localhost:8000/api/food')
+      .then((res)=> {
+        setFood(res.data)
+        food.map((meal)=>(
+          setCtotal(ctotal + meal.calories)
+        ))
+        // console.log(ctotal)
+      })
+      .catch((err)=>{console.log(err)})
+}, []
+)
+
+const removeWFromDom = (id) =>{
+  setWorkouts(workouts.filter(workout => workout._id != id))
+}
+const removeFFromDom = (id) =>{
+  setFood(food.filter(food => food._id != id))
+}
+const deleteWorkout = id =>{
+    axios.delete(`http://localhost:8000/api/activity/${id}`)
+    .then(
+      (res)=>{
+      console.log(res.data)
+      removeWFromDom(id)
+    })
+    .catch(err=>console.log(err))
+    navigate('/')
+}
+
+const deleteFood = (id) =>{
+  axios.delete(`http://localhost:8000/api/food/${id}`)
+  .then(
+    (res)=>{
+      console.log(res.data)
+      removeFFromDom(id)
+    })
+  .catch(err=>console.log(err))
+  navigate('/')
+}
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{margin: '20px'}}>
         <h2>Today's total:</h2>
-        <p>(Display  either positive or negative calorie value depending on which below is higher</p>
+        <p>
+          {ctotal} eaten - {btotal} burned = {ctotal - btotal}
+        </p>
       </div>
       <div style={{display: 'flex'}}>
         <div style={{margin: '20px'}}>
           <h3>Calories burned today:</h3>
-          <p>Display calorie total from today's inputs</p>
+          <div>
+        <TableContainer>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Exercise</TableCell>
+                        <TableCell>Duration</TableCell>
+                        <TableCell>Calories Burned</TableCell>
+                        <TableCell>Actions Available</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                {
+                    workouts.map((workout, index)=>(
+                        <TableRow key={index}>
+                            <TableCell>{workout.exercise}</TableCell>
+                            <TableCell>{workout.duration} mins</TableCell>
+                            <TableCell>{workout.burnedcalories} calories burned</TableCell>
+                            <TableCell>
+                                <Button onClick={()=>navigate(`exercise/edit/${workout._id}`)}>Edit</Button> 
+                                <Button onClick={()=>deleteWorkout(workout._id)}>Delete</Button> 
+                            </TableCell>
+                        </TableRow>
+                    ))
+                }
+                </TableBody>
+            </Table>
+        </TableContainer>
+    </div>
         </div>
         <div style={{margin: '20px'}}>
           <h3>Calories eaten today:</h3>
-          <p>Display calorie total from today's inputs</p>
+          <TableContainer>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Food Item</TableCell>
+                        <TableCell>Calories Consumed</TableCell>
+                        <TableCell>Actions Available</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                {
+                    food.map((food, index)=>(
+                        <TableRow key={index}>
+                            <TableCell>{food.food}</TableCell>
+                            <TableCell>{food.calories} calories consumed</TableCell>
+                            <TableCell>
+                                <Button onClick={()=>navigate(`food/edit/${food._id}`)}>Edit</Button> 
+                                <Button onClick={()=>deleteFood(food._id)}>Delete</Button> 
+                            </TableCell>
+                        </TableRow>
+                    ))
+                }
+                </TableBody>
+            </Table>
+        </TableContainer>
         </div>
       </div>
     </div>

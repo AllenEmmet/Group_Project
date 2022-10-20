@@ -5,8 +5,9 @@ import Header2 from '../components/Header2'
 import { AppBar } from '@mui/material'
 import Exercise from '../components/Exercise'
 
-const AddExcercise = () => {
-    
+const AddExercise = () => {
+  
+
   return (
     <div>
         <AppBar position='sticky'><Header2/></AppBar>
@@ -15,4 +16,4 @@ const AddExcercise = () => {
   )
 }
 
-export default AddExcercise
+export default AddExercise
